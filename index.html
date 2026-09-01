@@ -378,6 +378,7 @@ nav.scrolled {
     border-color: #555;
     transform: translateY(-4px);
 }
+
 /* =========================================================
    HERO IMAGE
 ========================================================= */
@@ -536,6 +537,7 @@ section {
     min-height: 420px;
 
     position: relative;
+    border-radius: 20px;
 }
 
 .project-image::before {
@@ -584,8 +586,9 @@ section {
     transform: scale(1.04);
 }
 
+/* Real Project Image Styling inside the 3D Card */
 .preview-card {
-    width: 65%;
+    width: 85%;
     aspect-ratio: 16 / 10;
 
     background: #151515;
@@ -597,7 +600,9 @@ section {
     box-shadow:
         0 40px 80px rgba(0,0,0,.5);
 
-    padding: 20px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
 
     transform:
         perspective(900px)
@@ -615,41 +620,35 @@ section {
         scale(1.04);
 }
 
-.fake-top {
-    height: 8px;
-    width: 40%;
-    border-radius: 20px;
-    background: #333;
-    margin-bottom: 30px;
+.preview-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.fake-line {
-    height: 9px;
-    width: 80%;
-    background: #272727;
-    margin-bottom: 12px;
-    border-radius: 20px;
-}
-
-.fake-line.short {
-    width: 55%;
-}
-
-.fake-boxes {
+/* Gallery Grid for Project 3 (Fox Store) */
+.preview-gallery {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-    margin-top: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
 }
 
-.fake-box {
-    aspect-ratio: 1;
+.preview-gallery img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border-radius: 8px;
-    background: linear-gradient(
-        135deg,
-        #181818,
-        #292929
-    );
+    border: 1px solid rgba(255,255,255,.1);
+    transition: transform 0.3s ease;
+}
+
+.preview-gallery img:hover {
+    transform: scale(1.05);
 }
 
 .project-info {
@@ -730,6 +729,7 @@ section {
     background: white;
     color: black;
 }
+
 /* =========================================================
    ABOUT
 ========================================================= */
@@ -1107,7 +1107,7 @@ footer {
     }
 
     .preview-card {
-        width: 75%;
+        width: 85%;
     }
 
     .project-name {
@@ -1191,6 +1191,7 @@ footer {
     </div>
 
 </nav>
+
 <header class="hero">
 
     <div class="hero-grid"></div>
@@ -1322,6 +1323,7 @@ footer {
     </div>
 
 
+    <!-- Project 1: Restaurant -->
     <article class="project reveal">
 
         <div class="project-image">
@@ -1329,20 +1331,7 @@ footer {
             <div class="project-preview">
 
                 <div class="preview-card">
-
-                    <div class="fake-top"></div>
-
-                    <div class="fake-line"></div>
-                    <div class="fake-line short"></div>
-
-                    <div class="fake-boxes">
-
-                        <div class="fake-box"></div>
-                        <div class="fake-box"></div>
-                        <div class="fake-box"></div>
-
-                    </div>
-
+                    <img src="projet 1/restaurant.jpg" alt="Restaurant Project">
                 </div>
 
             </div>
@@ -1391,6 +1380,7 @@ footer {
     </article>
 
 
+    <!-- Project 2: Gaming Platform -->
     <article class="project reveal">
 
         <div class="project-image">
@@ -1398,20 +1388,7 @@ footer {
             <div class="project-preview">
 
                 <div class="preview-card">
-
-                    <div class="fake-top"></div>
-
-                    <div class="fake-line"></div>
-                    <div class="fake-line short"></div>
-
-                    <div class="fake-boxes">
-
-                        <div class="fake-box"></div>
-                        <div class="fake-box"></div>
-                        <div class="fake-box"></div>
-
-                    </div>
-
+                    <img src="projet 1/gaming.jpg" alt="Gaming Platform Project">
                 </div>
 
             </div>
@@ -1459,6 +1436,7 @@ footer {
     </article>
 
 
+    <!-- Project 3: Fox Store (Updated with A1 to A6 Images) -->
     <article class="project reveal">
 
         <div class="project-image">
@@ -1466,20 +1444,14 @@ footer {
             <div class="project-preview">
 
                 <div class="preview-card">
-
-                    <div class="fake-top"></div>
-
-                    <div class="fake-line"></div>
-                    <div class="fake-line short"></div>
-
-                    <div class="fake-boxes">
-
-                        <div class="fake-box"></div>
-                        <div class="fake-box"></div>
-                        <div class="fake-box"></div>
-
+                    <div class="preview-gallery">
+                        <img src="A1.png" alt="Fox Store A1">
+                        <img src="A2.png" alt="Fox Store A2">
+                        <img src="A3.png" alt="Fox Store A3">
+                        <img src="A4.png" alt="Fox Store A4">
+                        <img src="A5.png" alt="Fox Store A5">
+                        <img src="A6.png" alt="Fox Store A6">
                     </div>
-
                 </div>
 
             </div>
@@ -1494,15 +1466,14 @@ footer {
             </div>
 
             <h3 class="project-name">
-                Digital<br>
-                Store
+                Fox Store
             </h3>
 
             <p class="project-description">
 
                 A clean e-commerce interface designed around
                 product discovery, clear hierarchy and a
-                frictionless shopping experience.
+                frictionless shopping experience for gaming and hardware.
 
             </p>
 
@@ -1529,6 +1500,8 @@ footer {
 </div>
 
 </section>
+
+
 <section id="about">
 
 <div class="container">
@@ -1842,7 +1815,8 @@ footer {
             </div>
 
         </div>
-                <div class="process-item reveal">
+
+        <div class="process-item reveal">
 
             <div class="process-number">
                 04
