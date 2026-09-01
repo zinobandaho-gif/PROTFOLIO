@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZOHIRE BN — UI/UX Designer & Web Developer</title>
+
+<meta name="description"
+content="ZOHIRE BN — UI/UX Designer and Web Developer from Algeria creating modern digital experiences.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050505;
+    color: #f5f5f5;
+    font-family: "Manrope", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --bg: #050505;
+    --surface: #0b0b0b;
+    --surface-2: #111111;
+    --text: #f5f5f5;
+    --muted: #8d8d8d;
+    --line: rgba(255,255,255,.10);
+
+    --blue: #00b7ff;
+    --orange: #ff7a00;
+
+    --max: 1400px;
+}
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+.cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    transition: width .25s ease,
+                height .25s ease;
+}
+
+.cursor.big {
+    width: 55px;
+    height: 55px;
+}
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader {
+    position: fixed;
+    inset: 0;
+    background: #050505;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease,
+                visibility 1s ease;
+}
+
+.loader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-text {
+    font-family: "DM Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #aaa;
+}
+
+.loader-number {
+    color: white;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    padding: 26px 5vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: .4s ease;
+}
+
+nav.scrolled {
+    background: rgba(5,5,5,.78);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.nav-links {
+    display: flex;
+    gap: 34px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-contact {
+    border: 1px solid var(--line);
+    padding: 11px 17px;
+    border-radius: 100px;
+    transition: .3s;
+}
+
+.nav-contact:hover {
+    background: white;
+    color: black !important;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    padding: 150px 5vw 80px;
+
+    overflow: hidden;
+}
+
+.hero-grid {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+    background-size: 80px 80px;
+
+    mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+.hero-glow {
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    right: -150px;
+    top: 100px;
+
+    background: radial-gradient(
+        circle,
+        rgba(0,183,255,.12),
+        transparent 65%
+    );
+
+    filter: blur(20px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: var(--max);
+
+    margin: auto;
+}
+
+.eyebrow {
+    font-family: "DM Mono", monospace;
+    color: var(--muted);
+
+    font-size: 12px;
+    letter-spacing: 2px;
+
+    margin-bottom: 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #54ff91;
+    box-shadow: 0 0 15px #54ff91;
+}
+
+/* HERO TITLE WITH AVATAR IMAGE IN FRONT */
+
+.hero-title-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.hero-title-avatar {
+    width: clamp(90px, 12vw, 150px);
+    height: clamp(90px, 12vw, 150px);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--blue);
+    box-shadow: 0 0 30px rgba(0, 183, 255, 0.35);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    flex-shrink: 0;
+}
+
+.hero-title-avatar:hover {
+    transform: scale(1.06) rotate(3deg);
+    box-shadow: 0 0 45px rgba(0, 183, 255, 0.6);
+}
+
+.hero-title {
+    font-size: clamp(60px, 10vw, 155px);
+    line-height: .86;
+    letter-spacing: -8px;
+    font-weight: 800;
+
+    max-width: 1000px;
+}
+
+.hero-title .outline {
+    color: transparent;
+    -webkit-text-stroke: 1px #555;
+}
+
+.hero-title .gradient {
+    background: linear-gradient(
+        100deg,
+        #fff,
+        #aaa,
+        #00b7ff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-bottom {
+    margin-top: 55px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    max-width: 1000px;
+}
+
+.hero-description {
+    color: #999;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 440px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px 23px;
+
+    border-radius: 100px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: .35s ease;
+}
+
+.btn-primary {
+    background: white;
+    color: black;
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(255,255,255,.12);
+}
+
+.btn-secondary {
+    border: 1px solid var(--line);
+    color: #ddd;
+}
+
+.btn-secondary:hover {
+    border-color: #555;
+    transform: translateY(-4px);
+}
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.hero-image {
+    position: absolute;
+    right: 4vw;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: min(34vw, 430px);
+    aspect-ratio: 4 / 5;
+
+    z-index: 1;
+
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 28px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(0, 183, 255, 0.12);
+
+    will-change: transform;
+    animation: floatFrame 6s ease-in-out infinite;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+}
+
+@keyframes floatFrame {
+    0%, 100% {
+        transform: translateY(-50%);
+    }
+
+    50% {
+        transform: translateY(calc(-50% - 12px));
+    }
+}
+
+/* =========================================================
+   MARQUEE
+========================================================= */
+
+.marquee {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    overflow: hidden;
+
+    padding: 22px 0;
+
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-flex;
+    gap: 50px;
+
+    animation: marquee 25s linear infinite;
+}
+
+.marquee span {
+    font-family: "DM Mono", monospace;
+    color: #777;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.marquee .star {
+    color: var(--blue);
+}
+
+@keyframes marquee {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section {
+    padding: 150px 5vw;
+}
+
+.container {
+    max-width: var(--max);
+    margin: auto;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-bottom: 70px;
+}
+
+.section-number {
+    font-family: "DM Mono", monospace;
+    color: var(--blue);
+    font-size: 12px;
+}
+
+.section-title {
+    font-size: clamp(45px, 7vw, 90px);
+    letter-spacing: -5px;
+    line-height: .9;
+    font-weight: 800;
+}
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+.projects {
+    background: #070707;
+}
+
+.project {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    min-height: 560px;
+
+    border-top: 1px solid var(--line);
+
+    padding: 60px 0;
+
+    gap: 70px;
+}
+
+.project:last-child {
+    border-bottom: 1px solid var(--line);
+}
+
+.project-image {
+    overflow: hidden;
+
+    background: #111;
+
+    min-height: 420px;
+
+    position: relative;
+}
+
+.project-image::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0,183,255,.25),
+            transparent 40%
+        );
+
+    z-index: 1;
+}
+
+.project:nth-child(3) .project-image::before {
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(255,122,0,.25),
+            transparent 40%
+        );
+}
+
+.project-preview {
+    width: 100%;
+    height: 100%;
+
+    min-height: 420px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: transform .7s cubic-bezier(.2,.7,.2,1);
+}
+
+.project:hover .project-preview {
+    transform: scale(1.04);
+}
+
+.preview-card {
+    width: 65%;
+    aspect-ratio: 16 / 10;
+
+    background: #151515;
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 40px 80px rgba(0,0,0,.5);
+
+    padding: 20px;
+
+    transform:
+        perspective(900px)
+        rotateX(8deg)
+        rotateY(-10deg);
+
+    transition: .7s;
+}
+
+.project:hover .preview-card {
+    transform:
+        perspective(900px)
+        rotateX(0)
+        rotateY(0)
+        scale(1.04);
+}
+
+.fake-top {
+    height: 8px;
+    width: 40%;
+    border-radius: 20px;
+    background: #333;
+    margin-bottom: 30px;
+}
+
+.fake-line {
+    height: 9px;
+    width: 80%;
+    background: #272727;
+    margin-bottom: 12px;
+    border-radius: 20px;
+}
+
+.fake-line.short {
+    width: 55%;
+}
+
+.fake-boxes {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.fake-box {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background: linear-gradient(
+        135deg,
+        #181818,
+        #292929
+    );
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-meta {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    color: #777;
+
+    margin-bottom: 22px;
+}
+
+.project-name {
+    font-size: clamp(38px, 5vw, 70px);
+    letter-spacing: -4px;
+    line-height: .95;
+    margin-bottom: 25px;
+}
+
+.project-description {
+    color: #8c8c8c;
+    max-width: 450px;
+    line-height: 1.8;
+    font-size: 14px;
+
+    margin-bottom: 35px;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 35px;
+}
+
+.tag {
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    border-radius: 100px;
+
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    color: #aaa;
+}
+
+.view-project {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    width: fit-content;
+}
+
+.arrow {
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid var(--line);
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: .3s;
+}
+
+.view-project:hover .arrow {
+    transform: rotate(45deg);
+    background: white;
+    color: black;
+}
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: .7fr 1.3fr;
+    gap: 100px;
+}
+
+.about-label {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    color: var(--blue);
+}
+
+.about-text {
+    font-size: clamp(30px, 4vw, 55px);
+    line-height: 1.15;
+    letter-spacing: -2px;
+}
+
+.about-text span {
+    color: #555;
+}
+
+.about-details {
+    margin-top: 50px;
+
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 30px;
+
+    border-top: 1px solid var(--line);
+    padding-top: 30px;
+}
+
+.detail-label {
+    font-family: "DM Mono", monospace;
+    color: #666;
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+
+.detail-value {
+    font-size: 14px;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.skills-section {
+    background: #080808;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+}
+
+.skill {
+    min-height: 190px;
+
+    padding: 30px;
+
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    transition: .4s;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.skill::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -100px;
+    bottom: -100px;
+
+    background: var(--blue);
+
+    border-radius: 50%;
+
+    filter: blur(60px);
+
+    opacity: 0;
+
+    transition: .5s;
+}
+
+.skill:hover {
+    background: #0d0d0d;
+}
+
+.skill:hover::after {
+    opacity: .15;
+}
+
+.skill-number {
+    font-family: "DM Mono", monospace;
+    color: #555;
+    font-size: 10px;
+}
+
+.skill h3 {
+    margin-top: 45px;
+    font-size: 20px;
+}
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process-list {
+    border-top: 1px solid var(--line);
+}
+
+.process-item {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+
+    padding: 35px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    transition: .3s;
+}
+
+.process-item:hover {
+    padding-left: 15px;
+}
+
+.process-number {
+    font-family: "DM Mono", monospace;
+    color: var(--blue);
+}
+
+.process-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.process-description {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 400px;
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+    min-height: 80vh;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.contact::before {
+    content: "";
+
+    position: absolute;
+
+    width: 700px;
+    height: 700px;
+
+    right: -250px;
+    bottom: -300px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,183,255,.16),
+            transparent 65%
+        );
+}
+
+.contact-content {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-title {
+    font-size: clamp(60px, 11vw, 170px);
+    line-height: .85;
+    letter-spacing: -9px;
+    font-weight: 800;
+
+    margin-bottom: 60px;
+}
+
+.contact-title span {
+    color: transparent;
+    -webkit-text-stroke: 1px #555;
+}
+
+.contact-email {
+    font-family: "DM Mono", monospace;
+    font-size: clamp(15px, 2vw, 22px);
+
+    color: #aaa;
+
+    border-bottom: 1px solid #444;
+
+    padding-bottom: 12px;
+
+    width: fit-content;
+
+    transition: .3s;
+}
+
+.contact-email:hover {
+    color: white;
+    border-color: white;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    border-top: 1px solid var(--line);
+
+    padding: 30px 5vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #666;
+
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+}
+
+.socials {
+    display: flex;
+    gap: 20px;
+}
+
+.socials a:hover {
+    color: white;
+}
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1000px) {
+
+    .hero-image {
+        opacity: .3;
+        width: 350px;
+        right: -60px;
+    }
+
+    .hero-title {
+        max-width: 800px;
+    }
+
+    .project {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .project-info {
+        padding-bottom: 30px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .process-item {
+        grid-template-columns: 70px 1fr;
+        gap: 20px;
+    }
+
+    .process-description {
+        grid-column: 2;
+    }
+
+}
+
+@media(max-width: 650px) {
+
+    nav {
+        padding: 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    section {
+        padding: 100px 20px;
+    }
+
+    .hero {
+        padding: 130px 20px 70px;
+    }
+
+    .hero-title-header {
+        gap: 15px;
+    }
+
+    .hero-title {
+        font-size: clamp(55px, 17vw, 100px);
+        letter-spacing: -5px;
+    }
+
+    .hero-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 35px;
+    }
+
+    .hero-image {
+        width: 280px;
+        right: -80px;
+        opacity: .2;
+    }
+
+    .section-header {
+        margin-bottom: 45px;
+    }
+
+    .section-title {
+        letter-spacing: -3px;
+    }
+
+    .project-image,
+    .project-preview {
+        min-height: 280px;
+    }
+
+    .preview-card {
+        width: 75%;
+    }
+
+    .project-name {
+        letter-spacing: -2px;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .skill {
+        min-height: 150px;
+        padding: 20px;
+    }
+
+    .skill h3 {
+        margin-top: 35px;
+        font-size: 16px;
+    }
+
+    .about-details {
+        grid-template-columns: 1fr;
+    }
+
+    .process-title {
+        font-size: 21px;
+    }
+
+    .contact-title {
+        letter-spacing: -5px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+}
+
+/* Disable cursor on touch devices */
+
+@media(pointer: coarse) {
+    .cursor {
+        display: none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loader">
+
+    <div class="loader-text">
+        LOADING <span class="loader-number">00</span>%
+    </div>
+
+</div>
+
+<div class="cursor"></div>
+
+<nav>
+
+    <a href="#" class="logo">
+        ZOHIRE<span>.</span>
+    </a>
+
+    <div class="nav-links">
+
+        <a href="#work">WORK</a>
+        <a href="#about">ABOUT</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#process">PROCESS</a>
+
+        <a href="#contact" class="nav-contact">
+            LET'S TALK
+        </a>
+
+    </div>
+
+</nav>
+<header class="hero">
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-glow"></div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow reveal">
+
+            <span class="status-dot"></span>
+
+            AVAILABLE FOR SELECTED PROJECTS
+
+        </div>
+
+        <div class="hero-title-header reveal">
+
+            <img
+                src="ZOHIRE.jpg"
+                alt="ZOHIRE"
+                class="hero-title-avatar"
+            >
+
+            <h1 class="hero-title">
+
+                DIGITAL
+                <br>
+
+                <span class="outline">
+                    EXPERIENCES
+                </span>
+
+                <br>
+
+                <span class="gradient">
+                    THAT MATTER.
+                </span>
+
+            </h1>
+
+        </div>
+
+        <div class="hero-bottom reveal">
+
+            <p class="hero-description">
+
+                I'm Zohire — a UI/UX Designer and Web Developer
+                from Algeria. I design and build digital experiences
+                that combine strong visuals, intuitive interaction
+                and clean technology.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#work" class="btn btn-primary">
+                    VIEW MY WORK
+                </a>
+
+                <a href="#contact" class="btn btn-secondary">
+                    CONTACT ME
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+
+        <img
+            src="ZOHIRE.jpg"
+            alt="Zohire BN"
+        >
+
+    </div>
+
+</header>
+
+
+<div class="marquee">
+
+    <div class="marquee-track">
+
+        <span>UI/UX DESIGN</span>
+        <span class="star">✦</span>
+
+        <span>WEB DEVELOPMENT</span>
+        <span class="star">✦</span>
+
+        <span>CREATIVE DIRECTION</span>
+        <span class="star">✦</span>
+
+        <span>INTERACTION DESIGN</span>
+        <span class="star">✦</span>
+
+        <span>UI/UX DESIGN</span>
+        <span class="star">✦</span>
+
+        <span>WEB DEVELOPMENT</span>
+        <span class="star">✦</span>
+
+        <span>CREATIVE DIRECTION</span>
+        <span class="star">✦</span>
+
+        <span>INTERACTION DESIGN</span>
+
+    </div>
+
+</div>
+
+
+<section class="projects" id="work">
+
+<div class="container">
+
+    <div class="section-header reveal">
+
+        <div class="section-number">
+            01 / SELECTED WORK
+        </div>
+
+        <h2 class="section-title">
+            WORK.
+        </h2>
+
+    </div>
+
+
+    <article class="project reveal">
+
+        <div class="project-image">
+
+            <div class="project-preview">
+
+                <div class="preview-card">
+
+                    <div class="fake-top"></div>
+
+                    <div class="fake-line"></div>
+                    <div class="fake-line short"></div>
+
+                    <div class="fake-boxes">
+
+                        <div class="fake-box"></div>
+                        <div class="fake-box"></div>
+                        <div class="fake-box"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="project-info">
+
+            <div class="project-meta">
+                01 — UI/UX / WEB DEVELOPMENT
+            </div>
+
+            <h3 class="project-name">
+                Restaurant
+            </h3>
+
+            <p class="project-description">
+
+                A modern restaurant experience designed to
+                make menus, dishes, locations and reservations
+                feel simple, elegant and accessible.
+
+            </p>
+
+            <div class="project-tags">
+
+                <span class="tag">UI DESIGN</span>
+                <span class="tag">UX DESIGN</span>
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JAVASCRIPT</span>
+
+            </div>
+
+            <a href="#" class="view-project">
+
+                VIEW CASE STUDY
+
+                <span class="arrow">↗</span>
+
+            </a>
+
+        </div>
+
+    </article>
+
+
+    <article class="project reveal">
+
+        <div class="project-image">
+
+            <div class="project-preview">
+
+                <div class="preview-card">
+
+                    <div class="fake-top"></div>
+
+                    <div class="fake-line"></div>
+                    <div class="fake-line short"></div>
+
+                    <div class="fake-boxes">
+
+                        <div class="fake-box"></div>
+                        <div class="fake-box"></div>
+                        <div class="fake-box"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="project-info">
+
+            <div class="project-meta">
+                02 — DIGITAL PRODUCT
+            </div>
+
+            <h3 class="project-name">
+                Gaming<br>
+                Platform
+            </h3>
+
+            <p class="project-description">
+
+                An immersive gaming platform concept focused
+                on discovery, game information and a smooth
+                user journey across desktop and mobile.
+
+            </p>
+
+            <div class="project-tags">
+
+                <span class="tag">PRODUCT DESIGN</span>
+                <span class="tag">PROTOTYPING</span>
+                <span class="tag">RESPONSIVE</span>
+
+            </div>
+
+            <a href="#" class="view-project">
+
+                VIEW CASE STUDY
+
+                <span class="arrow">↗</span>
+
+            </a>
+
+        </div>
+
+    </article>
+
+
+    <article class="project reveal">
+
+        <div class="project-image">
+
+            <div class="project-preview">
+
+                <div class="preview-card">
+
+                    <div class="fake-top"></div>
+
+                    <div class="fake-line"></div>
+                    <div class="fake-line short"></div>
+
+                    <div class="fake-boxes">
+
+                        <div class="fake-box"></div>
+                        <div class="fake-box"></div>
+                        <div class="fake-box"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="project-info">
+
+            <div class="project-meta">
+                03 — E-COMMERCE / UI DESIGN
+            </div>
+
+            <h3 class="project-name">
+                Digital<br>
+                Store
+            </h3>
+
+            <p class="project-description">
+
+                A clean e-commerce interface designed around
+                product discovery, clear hierarchy and a
+                frictionless shopping experience.
+
+            </p>
+
+            <div class="project-tags">
+
+                <span class="tag">UX RESEARCH</span>
+                <span class="tag">UI DESIGN</span>
+                <span class="tag">FRONT-END</span>
+
+            </div>
+
+            <a href="#" class="view-project">
+
+                VIEW CASE STUDY
+
+                <span class="arrow">↗</span>
+
+            </a>
+
+        </div>
+
+    </article>
+
+</div>
+
+</section>
+<section id="about">
+
+<div class="container">
+
+    <div class="section-header reveal">
+
+        <div class="section-number">
+            02 / ABOUT
+        </div>
+
+    </div>
+
+
+    <div class="about-grid">
+
+        <div class="about-label reveal">
+            WHO I AM
+        </div>
+
+
+        <div>
+
+            <p class="about-text reveal">
+
+                I create <span>digital experiences</span>
+                where design meets technology.
+
+            </p>
+
+
+            <p class="about-text reveal" style="margin-top:30px;">
+
+                From the first idea to the final line of code,
+                I care about making every interaction feel
+                intentional.
+
+            </p>
+
+
+            <div class="about-details reveal">
+
+                <div>
+
+                    <div class="detail-label">
+                        NAME
+                    </div>
+
+                    <div class="detail-value">
+                        ZOHIRE BN
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <div class="detail-label">
+                        LOCATION
+                    </div>
+
+                    <div class="detail-value">
+                        ALGERIA
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <div class="detail-label">
+                        ROLE
+                    </div>
+
+                    <div class="detail-value">
+                        UI/UX DESIGNER
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <div class="detail-label">
+                        ALSO
+                    </div>
+
+                    <div class="detail-value">
+                        WEB DEVELOPER
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<section class="skills-section" id="skills">
+
+<div class="container">
+
+    <div class="section-header reveal">
+
+        <div class="section-number">
+            03 / EXPERTISE
+        </div>
+
+        <h2 class="section-title">
+            SKILLS.
+        </h2>
+
+    </div>
+
+
+    <div class="skills-grid reveal">
+
+
+        <div class="skill">
+
+            <span class="skill-number">
+                01
+            </span>
+
+            <h3>
+                UI Design
+            </h3>
+
+        </div>
+
+
+        <div class="skill">
+
+            <span class="skill-number">
+                02
+            </span>
+
+            <h3>
+                UX Design
+            </h3>
+
+        </div>
+
+
+        <div class="skill">
+
+            <span class="skill-number">
+                03
+            </span>
+
+            <h3>
+                Prototyping
+            </h3>
+
+        </div>
+
+
+        <div class="skill">
+
+            <span class="skill-number">
+                04
+            </span>
+
+            <h3>
+                Design Systems
+            </h3>
+
+        </div>
+
+
+        <div class="skill">
+
+            <span class="skill-number">
+                05
+            </span>
+
+            <h3>
+                HTML / CSS
+            </h3>
+
+        </div>
+
+
+        <div class="skill">
+
+            <span class="skill-number">
+                06
+            </span>
+
+            <h3>
+                JavaScript
+            </h3>
+
+        </div>
+
+
+        <div class="skill">
+
+            <span class="skill-number">
+                07
+            </span>
+
+            <h3>
+                Responsive Web
+            </h3>
+
+        </div>
+
+
+        <div class="skill">
+
+            <span class="skill-number">
+                08
+            </span>
+
+            <h3>
+                Creative Development
+            </h3>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<section id="process">
+
+<div class="container">
+
+    <div class="section-header reveal">
+
+        <div class="section-number">
+            04 / PROCESS
+        </div>
+
+        <h2 class="section-title">
+            HOW I<br>WORK.
+        </h2>
+
+    </div>
+
+
+    <div class="process-list">
+
+        <div class="process-item reveal">
+
+            <div class="process-number">
+                01
+            </div>
+
+            <div class="process-title">
+                Discover
+            </div>
+
+            <div class="process-description">
+
+                Understand the idea, audience,
+                objectives and problems that need
+                to be solved.
+
+            </div>
+
+        </div>
+
+
+        <div class="process-item reveal">
+
+            <div class="process-number">
+                02
+            </div>
+
+            <div class="process-title">
+                Research
+            </div>
+
+            <div class="process-description">
+
+                Explore users, competitors,
+                references and opportunities
+                before designing.
+
+            </div>
+
+        </div>
+
+
+        <div class="process-item reveal">
+
+            <div class="process-number">
+                03
+            </div>
+
+            <div class="process-title">
+                Design
+            </div>
+
+            <div class="process-description">
+
+                Turn ideas into wireframes,
+                interfaces, prototypes and
+                complete visual systems.
+
+            </div>
+
+        </div>
+                <div class="process-item reveal">
+
+            <div class="process-number">
+                04
+            </div>
+
+            <div class="process-title">
+                Develop
+            </div>
+
+            <div class="process-description">
+
+                Transform the approved design
+                into a responsive, interactive
+                digital experience.
+
+            </div>
+
+        </div>
+
+
+        <div class="process-item reveal">
+
+            <div class="process-number">
+                05
+            </div>
+
+            <div class="process-title">
+                Refine
+            </div>
+
+            <div class="process-description">
+
+                Test, optimize and polish every
+                detail before the final launch.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<section class="contact" id="contact">
+
+<div class="container">
+
+    <div class="contact-content">
+
+        <div class="eyebrow reveal">
+            HAVE A PROJECT IN MIND?
+        </div>
+
+
+        <h2 class="contact-title reveal">
+
+            LET'S<br>
+
+            <span>CREATE.</span>
+
+        </h2>
+
+
+        <a
+            href="mailto:zinobandaho@gmail.com"
+            class="contact-email reveal"
+        >
+            zinobandaho@gmail.com ↗
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+    <div>
+        © 2026 ZOHIRE BN
+    </div>
+
+
+    <div class="socials">
+
+        <a
+            href="https://discord.com/users/1518183918480916628"
+            target="_blank"
+        >
+            DISCORD
+        </a>
+
+        <a
+            href="https://x.com/Zino_dxs"
+            target="_blank"
+        >
+            TWITTER
+        </a>
+
+        <a
+            href="https://github.com/zinobandaho-gif"
+            target="_blank"
+        >
+            GITHUB
+        </a>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+let number = 0;
+
+const loaderNumber =
+    document.querySelector(".loader-number");
+
+const loader =
+    document.querySelector(".loader");
+
+const loading = setInterval(() => {
+
+    number++;
+
+    loaderNumber.textContent =
+        String(number).padStart(2, "0");
+
+    if(number >= 100){
+
+        clearInterval(loading);
+
+        setTimeout(() => {
+
+            loader.classList.add("hide");
+
+        }, 400);
+
+    }
+
+}, 18);
+
+
+/* =========================================================
+   NAVIGATION SCROLL
+========================================================= */
+
+const nav = document.querySelector("nav");
+
+window.addEventListener("scroll", () => {
+
+    if(window.scrollY > 50){
+
+        nav.classList.add("scrolled");
+
+    }else{
+
+        nav.classList.remove("scrolled");
+
+    }
+
+});
+
+
+/* =========================================================
+   REVEAL ON SCROLL
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .12
+        }
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(element => {
+
+        observer.observe(element);
+
+    });
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+const cursor =
+    document.querySelector(".cursor");
+
+
+if(window.matchMedia("(pointer:fine)").matches){
+
+    document.addEventListener("mousemove", e => {
+
+        cursor.style.left =
+            e.clientX + "px";
+
+        cursor.style.top =
+            e.clientY + "px";
+
+    });
+
+
+    document
+        .querySelectorAll("a, button, .project, .skill")
+        .forEach(element => {
+
+            element.addEventListener("mouseenter", () => {
+
+                cursor.classList.add("big");
+
+            });
+
+
+            element.addEventListener("mouseleave", () => {
+
+                cursor.classList.remove("big");
+
+            });
+
+        });
+
+}
+
+
+/* =========================================================
+   SMOOTH ANCHOR
+========================================================= */
+
+document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(anchor => {
+
+        anchor.addEventListener("click", function(e){
+
+            const target =
+                document.querySelector(
+                    this.getAttribute("href")
+                );
+
+            if(target){
+
+                e.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }
+
+        });
+
+    });
+
+
+/* =========================================================
+   PROJECT PARALLAX
+========================================================= */
+
+document
+    .querySelectorAll(".project-image")
+    .forEach(project => {
+
+        project.addEventListener("mousemove", e => {
+
+            const rect =
+                project.getBoundingClientRect();
+
+            const x =
+                e.clientX - rect.left;
+
+            const y =
+                e.clientY - rect.top;
+
+            const rotateY =
+                ((x / rect.width) - .5) * 5;
+
+            const rotateX =
+                ((y / rect.height) - .5) * -5;
+
+            const card =
+                project.querySelector(".preview-card");
+
+            card.style.transform =
+                `
+                perspective(900px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale(1.03)
+                `;
+
+        });
+
+
+        project.addEventListener("mouseleave", () => {
+
+            const card =
+                project.querySelector(".preview-card");
+
+            card.style.transform =
+                `
+                perspective(900px)
+                rotateX(8deg)
+                rotateY(-10deg)
+                scale(1)
+                `;
+
+        });
+
+    });
+
+
+/* =========================================================
+   CURRENT YEAR
+========================================================= */
+
+document
+    .querySelector("footer div")
+    .textContent =
+    "© " + new Date().getFullYear() + " ZOHIRE BN";
+
+</script>
+
+</body>
+</html>
